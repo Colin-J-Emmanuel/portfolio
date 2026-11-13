@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import HeroVisual from '../../components/HeroVisual.astro';
+import Sections from '../../components/Sections.astro';
+import { projects, nextProject, themeVars } from '../../data/projects';
+import type { Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+interface Props { project: Project }
+const { project: p } = Astro.props;
+const next = nextProject(p.slug);
+const plain = p.lead.replace(/<[^>]+>/g, '');
+---
+<Base title={p.title} description={`${plain} ${p.sub}`} themeColor={p.theme.band}>
+  <div style={themeVars(p.theme)}>
+    <Nav />
+    <header class="cs-header wrap">
+      <div class="cs-header__inner container">
+        <a class="cs-back" href="/#projects">← All projects</a>
+        <div class="cs-intro">
+          <span class="badge">{p.badge}</span>
+          <h1>{p.title}</h1>
+          <p class="cs-intro__lead" set:html={p.lead} />
+          <p class="cs-intro__sub">{p.sub}</p>
+        </div>
+        <div class="buttons">
+          {p.buttons.map((b, i) => (
+            <a class:list={['btn', i === 0 ? 'btn--accent' : 'btn--on-band']} href={b.href} target="_blank" rel="noopener">{b.label}</a>
+          ))}
+        </div>
+        <HeroVisual hero={p.hero} />
+      </div>
+    </header>
+    <main class="wrap">
+      <div class="container">
+        <section class="glance" aria-label="At a glance">
+          {p.glance.map((g) => <div><span class="label">{g.label}</span><span>{g.value}</span></div>)}
+        </section>
+        <Sections sections={p.sections} />
+        <a class="next" href={`/projects/${next.slug}`}>
+          <span><span class="label">Next project</span><strong>{next.title}</strong></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <Footer class="cs-footer" />
+      </div>
+    </main>
+  </div>
+</Base>

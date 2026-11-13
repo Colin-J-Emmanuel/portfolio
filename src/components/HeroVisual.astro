@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import type { HeroVisual } from '../data/projects/types';
+interface Props { hero: HeroVisual }
+const { hero } = Astro.props;
+---
+{hero.kind === 'image' && (
+  <Image class="cs-hero-img" src={hero.image.src} alt={hero.image.alt} widths={[640, 1120, 1600]} sizes="(max-width: 1168px) 100vw, 1120px" loading="eager" />
+)}
+{hero.kind === 'pipeline' && (
+  <div class="pipeline" role="img" aria-label="Pipeline: a pull request triggers a FastAPI receiver that verifies, dedupes and returns 202; Redis hands it to a worker that checks the budget and fetches the diff; security, quality, testing and docs agents run in parallel; an aggregator dedupes, tiers and sorts; one PR comment is kept current.">
+    <div class="pipeline__box">Pull request<small>opened · updated</small></div>
+    <span class="pipeline__arrow" aria-hidden="true">→</span>
+    <div class="pipeline__box">FastAPI receiver<small>verify HMAC · dedupe · 202</small></div>
+    <span class="pipeline__arrow" aria-hidden="true">→</span>
+    <div class="pipeline__box">Redis → worker<small>budget check · fetch diff</small></div>
+    <span class="pipeline__arrow" aria-hidden="true">→</span>
+    <div class="pipeline__group"><small>in parallel</small><div><span>security</span><span>quality</span><span>testing</span><span>docs</span></div></div>
+    <span class="pipeline__arrow" aria-hidden="true">→</span>
+    <div class="pipeline__box">Aggregator<small>dedupe · tier · sort</small></div>
+    <span class="pipeline__arrow" aria-hidden="true">→</span>
+    <div class="pipeline__box pipeline__box--end">One PR comment<small>kept current</small></div>
+  </div>
+)}
+{hero.kind === 'terminal' && (
+  <div class="terminal">
+    <div class="terminal__bar" aria-hidden="true"><i></i><i></i><i></i><span>{hero.command}</span></div>
+    <div class="terminal__body">
+      {hero.lines.map((l, i) =>
+        l.type === 'prompt'
+          ? <span><span class="p">&gt;</span> {l.text}{i === hero.lines.length - 1 && <span class="cursor" aria-hidden="true">▌</span>}</span>
+          : <span class={l.type === 'out' ? 'o' : 'r'}>{l.text}</span>
+      )}
+    </div>
+  </div>
+)}
+{hero.kind === 'compare' && (
+  <div class="compare">
+    <figure>
+      <Image src={hero.before.src} alt={hero.before.alt} widths={[560, 1120]} sizes="(max-width: 700px) 100vw, 552px" loading="eager" />
+      <figcaption>{hero.before.caption}</figcaption>
+    </figure>
+    <figure class="is-on">
+      <Image src={hero.after.src} alt={hero.after.alt} widths={[560, 1120]} sizes="(max-width: 700px) 100vw, 552px" loading="eager" />
+      <figcaption>{hero.after.caption}</figcaption>
+    </figure>
+  </div>
+)}

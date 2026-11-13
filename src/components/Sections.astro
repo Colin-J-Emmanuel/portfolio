@@ -1,0 +1,184 @@
+---
+import { Image } from 'astro:assets';
+import SectionTitle from './SectionTitle.astro';
+import type { Section } from '../data/projects/types';
+interface Props { sections: Section[] }
+const { sections } = Astro.props;
+const full = '(max-width: 1168px) 100vw, 1120px';
+const half = '(max-width: 960px) 100vw, 528px';
+---
+{sections.map((s, idx) => {
+  const first = idx === 0;
+  switch (s.kind) {
+    case 'prose':
+      return (
+        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+          <div class="cs-split">
+            <SectionTitle num={s.num} title={s.title} />
+            <div class="cs-text">
+              {s.paragraphs.map((p) => <p set:html={p} />)}
+              {s.quote && <blockquote class="quote" set:html={s.quote} />}
+            </div>
+          </div>
+        </section>
+      );
+    case 'steps':
+      return (
+        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+          <div class="cs-split">
+            <SectionTitle num={s.num} title={s.title} />
+            {s.intro && <p class="cs-text" set:html={s.intro} />}
+          </div>
+          <div class="steps">
+            {s.steps.map((st, i) => (
+              <figure>
+                <Image class="figure-img" src={st.src} alt={st.alt} widths={[540, 1080, 1600]} sizes={half} />
+                <figcaption><span class="mono">{i + 1}</span><span><strong>{st.title}</strong> <Fragment set:html={st.body} /></span></figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      );
+    case 'image':
+      return (
+        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+          <div class="cs-split">
+            <SectionTitle num={s.num} title={s.title} />
+            {s.intro && <p class="cs-text" set:html={s.intro} />}
+          </div>
+          <figure>
+            <Image class="figure-img" src={s.image.src} alt={s.image.alt} widths={[640, 1120, 1600]} sizes={full} />
+            {s.image.caption && <figcaption class="figure-cap">{s.image.caption}</figcaption>}
+          </figure>
+          {s.cards && (
+            <div class="cards" style="--min: 280px">
+              {s.cards.map((c) => <div class="info"><h3>{c.title}</h3><p set:html={c.body} /></div>)}
+            </div>
+          )}
+        </section>
+      );
+    case 'split':
+      return (
+        <section class="media-split">
+          <div class="cs-text">
+            <span class="cs-num">{s.num}</span>
+            <h2 style="font-size: 32px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink)">{s.title}</h2>
+            {s.paragraphs.map((p) => <p set:html={p} />)}
+          </div>
+          <figure>
+            <Image class="figure-img" src={s.image.src} alt={s.image.alt} widths={[540, 878]} sizes={half} />
+            {s.image.caption && <figcaption class="figure-cap">{s.image.caption}</figcaption>}
+          </figure>
+        </section>
+      );
+    case 'points':
+      return (
+        <section class="media-split media-split--top">
+          <div class="cs-text" style="flex: 3 1 560px; gap: 28px">
+            <SectionTitle num={s.num} title={s.title} />
+            <div class="points">
+              {s.points.map((p) => <div><h3>{p.title}</h3><p set:html={p.body} /></div>)}
+            </div>
+          </div>
+          <figure class="narrow">
+            <Image class="phone" src={s.phone.src} alt={s.phone.alt} widths={[300, 390]} sizes="300px" />
+          </figure>
+        </section>
+      );
+    case 'gallery':
+      return (
+        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+          <div class="cs-split"><SectionTitle num={s.num} title={s.title} />{s.intro && <p class="cs-text" set:html={s.intro} />}</div>
+          <div class="media-split media-split--top" style="padding-top: 0; gap: 28px">
+            <figure style="flex: 3 1 560px">
+              <Image class="figure-img" src={s.main.src} alt={s.main.alt} widths={[640, 1120, 1600]} sizes="(max-width: 960px) 100vw, 780px" />
+              {s.main.caption && <figcaption class="figure-cap">{s.main.caption}</figcaption>}
+            </figure>
+            <figure style="flex: 1 1 200px; max-width: 300px">
+              <Image class="figure-img" src={s.side.src} alt={s.side.alt} widths={[300, 600]} sizes="300px" />
+              {s.side.caption && <figcaption class="figure-cap">{s.side.caption}</figcaption>}
+            </figure>
+          </div>
+        </section>
+      );
+    case 'cards':
+      return (
+        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+          <div class="cs-split">
+            <SectionTitle num={s.num} title={s.title} />
+            {s.intro && <p class="cs-text" set:html={s.intro} />}
+          </div>
+          <div class="cards" style={`--min: ${s.min ?? 300}px`}>
+            {s.items.map((c, i) => (
+              <div class:list={['info', { 'info--dark': s.lastDark && i === s.items.length - 1 }]}>
+                <h3>{c.title}</h3><p set:html={c.body} />
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    case 'rows':
+      return (
+        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+          <div class="cs-split">
+            <SectionTitle num={s.num} title={s.title} />
+            {s.intro && <p class="cs-text" set:html={s.intro} />}
+          </div>
+          <div class="rows">
+            {s.items.map((r) => <div class="row"><h3>{r.title}</h3><p set:html={r.body} /></div>)}
+          </div>
+        </section>
+      );
+    case 'table':
+      return (
+        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+          <div class="cs-split">
+            <SectionTitle num={s.num} title={s.title} />
+            {s.intro && <p class="cs-text" set:html={s.intro} />}
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr>{s.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+              <tbody>
+                {s.rows.map((r) => (
+                  <tr>{r.map((c, i) => <td class:list={{ strong: s.strongLast && i === r.length - 1 }} set:html={c} />)}</tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {s.cards && (
+            <div class="cards" style="--min: 280px">
+              {s.cards.map((c) => <div class="info"><h3>{c.title}</h3><p set:html={c.body} /></div>)}
+            </div>
+          )}
+        </section>
+      );
+    case 'story':
+      return (
+        <section class="story">
+          <span class="story__label">{s.label}</span>
+          <h2>{s.title}</h2>
+          <div class="story__body">
+            <div class="story__text">{s.paragraphs.map((p) => <p set:html={p} />)}</div>
+            {s.stats && (
+              <div class="stats">
+                {s.stats.map((st) => (
+                  <div class:list={['stat', { 'stat--hi': st.highlight, 'stat--full': st.full }]}>
+                    <span>{st.label}</span><span>{st.value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          {s.closing && <p class="story__close">{s.closing}</p>}
+        </section>
+      );
+    case 'limits':
+      return (
+        <section class="limits">
+          <div class="limits__a"><span class="label">{s.limitsLabel}</span><ul>{s.limits.map((l) => <li set:html={l} />)}</ul></div>
+          <div class="limits__b"><span class="label">{s.nextLabel}</span><ul>{s.next.map((l) => <li set:html={l} />)}</ul></div>
+        </section>
+      );
+  }
+})}

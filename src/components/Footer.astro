@@ -1,0 +1,6 @@
+---
+import { site } from '../data/site';
+interface Props { class?: string }
+const year = new Date().getFullYear();
+---
+<footer class:list={['footer', Astro.props.class]}>© {year} {site.name}</footer>

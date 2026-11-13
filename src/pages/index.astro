@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import { projects, featured, themeVars } from '../data/projects';
+
+const rest = projects.filter((p) => p !== featured);
+const grid = rest.slice(0, 3);
+const wide = rest.slice(3);
+const featuredHero = featured.hero.kind === 'image' ? featured.hero.image : null;
+const ext = { target: '_blank', rel: 'noopener' };
+---
+<Base>
+  <Nav ruled />
+  <main class="wrap">
+    <div class="container">
+      <section class="hero">
+        <p class="hero__interests"><span class="hero__dot" aria-hidden="true">●</span>{site.interests.join(' · ')}</p>
+        <h1>I build software that holds up in the <span class="hl">real world</span>.</h1>
+        <p class="hero__lead">Backends, machine learning and full-stack apps: a PR review pipeline that runs four agents in parallel, an SDXL model fine-tuned to keep one character consistent, and a PayPal agent that keeps a Tanzanian shopkeeper's books in Swahili. Each one built to be explained, decision by decision.</p>
+        <div class="buttons">
+          <a class="btn btn--primary" href="#projects">View projects</a>
+          <a class="btn btn--ghost" href={site.links.resume} {...ext}>Resume (PDF)</a>
+          <a class="btn btn--ghost" href={site.links.github} {...ext}>GitHub</a>
+          <a class="btn btn--ghost" href={site.links.linkedin} {...ext}>LinkedIn</a>
+        </div>
+      </section>
+
+      <section id="projects" class="projects" aria-labelledby="projects-label">
+        <h2 id="projects-label" class="eyebrow">Featured project</h2>
+        <article class="featured" style={themeVars(featured.theme)}>
+          {featuredHero && (
+            <div class="featured__media">
+              <Image src={featuredHero.src} alt={featuredHero.alt} widths={[560, 1100, 1600]} sizes="(max-width: 960px) 100vw, 600px" loading="eager" />
+            </div>
+          )}
+          <div class="featured__body">
+            <div class="badges">
+              <span class="badge">{featured.badge}</span>
+              <span class="badge badge--live">● Live</span>
+            </div>
+            <h3 style="font-size: 36px; font-weight: 600; letter-spacing: -0.02em; color: var(--on-band-strong)">{featured.title}</h3>
+            <p class="featured__tagline" set:html={featured.lead.replace(/<\/?em>/g, '')} />
+            <p class="featured__desc">{featured.card.summary}</p>
+            <div class="steps-log" aria-label="Example of the agent's work">
+              <span><b aria-hidden="true">✓</b>Recorded Mama Asha's rice, 15,000 TZS on credit</span>
+              <span><b aria-hidden="true">✓</b>Created a PayPal top-up request for $20.00</span>
+              <span><b aria-hidden="true">✓</b>Sent it to Juma in New York</span>
+            </div>
+            <div class="tags">{featured.card.tags.map((t) => <span class="tag">{t}</span>)}</div>
+            <div class="buttons">
+              <a class="btn btn--accent btn--sm" href={featured.buttons[0].href} {...ext}>{featured.buttons[0].label}</a>
+              {featured.buttons[1] && <a class="btn btn--on-band btn--sm" href={featured.buttons[1].href} {...ext}>{featured.buttons[1].label}</a>}
+              <a class="btn btn--on-band btn--sm" href={`/projects/${featured.slug}`}>Case study</a>
+              {featured.buttons[2] && <a class="link-plain" href={featured.buttons[2].href} {...ext}>Source →</a>}
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid-projects" aria-label="More projects">
+        {[...grid, ...wide].map((p, i) => {
+          const isWide = i >= grid.length;
+          const joins = p.card.flowJoin ?? [];
+          const flow = p.card.flow && (
+            <div class="flow" style={`--card-accent:${p.theme.band}`} aria-hidden="true">
+              {p.card.flow.map((f, j) => (
+                <Fragment>
+                  {j > 0 && <span aria-hidden="true">{joins[j - 1] ?? '→'}</span>}
+                  <span class:list={{ on: f.on }}>{f.label}</span>
+                </Fragment>
+              ))}
+            </div>
+          );
+          const shot = p.card.shot && (
+            <Image class="card__shot" src={p.card.shot.src} alt={p.card.shot.alt} widths={[400, 800]} sizes="360px" />
+          );
+          const text = (
+            <Fragment>
+              <h3>{p.title}</h3>
+              <p>{p.card.summary}</p>
+              <div class="tags">{p.card.tags.map((t) => <span class="tag">{t}</span>)}</div>
+              <div class="card__links">
+                <a href={`/projects/${p.slug}`}>Case study →</a>
+                {p.card.links.map((l) => <a href={l.href} {...ext}>{l.label}</a>)}
+              </div>
+            </Fragment>
+          );
+          return isWide ? (
+            <article class="card card--wide">{flow}{shot}<div class="card__text">{text}</div></article>
+          ) : (
+            <article class="card">{flow}{shot}{text}</article>
+          );
+        })}
+      </section>
+
+      <section id="about" class="about">
+        <div>
+          <h2>Stack</h2>
+          <div class="stack-groups">
+            {site.stack.map((g) => (
+              <div class="stack-group">
+                <span class="label">{g.group}</span>
+                <div class="pills">{g.items.map((it) => <span class="pill">{it}</span>)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2>Background</h2>
+          <div class="timeline">
+            <ul>
+              {site.background.map((b) => <li><strong>{b.title}</strong><span>{b.detail}</span></li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  </main>
+</Base>
