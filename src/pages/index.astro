@@ -20,6 +20,9 @@ const ext = { target: '_blank', rel: 'noopener' };
         <p class="hero__interests"><span class="hero__dot" aria-hidden="true">●</span>{site.interests.join(' · ')}</p>
         <h1>I build software that holds up in the <span class="hl">real world</span>.</h1>
         <p class="hero__lead">Backends, machine learning and full-stack apps: a PR review pipeline that runs four agents in parallel, an SDXL model fine-tuned to keep one character consistent, and a PayPal agent that keeps a Tanzanian shopkeeper's books in Swahili. Each one built to be explained, decision by decision.</p>
+        <ul class="creds" aria-label="Credentials">
+          {site.credentials.map((c) => <li>{c}</li>)}
+        </ul>
         <div class="buttons">
           <a class="btn btn--primary" href="#projects">View projects</a>
           <a class="btn btn--ghost" href={site.links.resume} {...ext}>Resume (PDF)</a>
@@ -43,7 +46,7 @@ const ext = { target: '_blank', rel: 'noopener' };
             </div>
             <h3 style="font-size: 36px; font-weight: 600; letter-spacing: -0.02em; color: var(--on-band-strong)">{featured.title}</h3>
             <p class="featured__tagline" set:html={featured.lead.replace(/<\/?em>/g, '')} />
-            <p class="featured__desc">{featured.card.summary}</p>
+            <p class="featured__desc">{featured.card.outcome}</p>
             <div class="steps-log" aria-label="Example of the agent's work">
               <span><b aria-hidden="true">✓</b>Recorded Mama Asha's rice, 15,000 TZS on credit</span>
               <span><b aria-hidden="true">✓</b>Created a PayPal top-up request for $20.00</span>
@@ -64,39 +67,79 @@ const ext = { target: '_blank', rel: 'noopener' };
         {[...grid, ...wide].map((p, i) => {
           const isWide = i >= grid.length;
           const joins = p.card.flowJoin ?? [];
-          const flow = p.card.flow && (
-            <div class="flow" style={`--card-accent:${p.theme.band}`} aria-hidden="true">
-              {p.card.flow.map((f, j) => (
-                <Fragment>
-                  {j > 0 && <span aria-hidden="true">{joins[j - 1] ?? '→'}</span>}
-                  <span class:list={{ on: f.on }}>{f.label}</span>
-                </Fragment>
-              ))}
+          const visual = (
+            <div class="card__visual">
+              {p.card.flow && (
+                <div class="flow" aria-hidden="true">
+                  {p.card.flow.map((f, j) => (
+                    <Fragment>
+                      {j > 0 && <span aria-hidden="true">{joins[j - 1] ?? '→'}</span>}
+                      <span class:list={{ on: f.on }}>{f.label}</span>
+                    </Fragment>
+                  ))}
+                </div>
+              )}
+              {p.card.shot && (
+                <Image class="card__shot" src={p.card.shot.src} alt={p.card.shot.alt} widths={[400, 800]} sizes="360px" />
+              )}
             </div>
           );
-          const shot = p.card.shot && (
-            <Image class="card__shot" src={p.card.shot.src} alt={p.card.shot.alt} widths={[400, 800]} sizes="360px" />
-          );
           const text = (
-            <Fragment>
-              <h3>{p.title}</h3>
-              <p>{p.card.summary}</p>
+            <div class="card__text">
+              <div class="meta">
+                {p.card.kind.map((k) => <span>{k}</span>)}
+                <span>{p.card.year}</span>
+              </div>
+              <h3><a href={`/projects/${p.slug}`}>{p.title}</a></h3>
+              <p>{p.card.outcome}</p>
               <div class="tags">{p.card.tags.map((t) => <span class="tag">{t}</span>)}</div>
               <div class="card__links">
                 <a href={`/projects/${p.slug}`}>Case study →</a>
                 {p.card.links.map((l) => <a href={l.href} {...ext}>{l.label}</a>)}
               </div>
-            </Fragment>
+            </div>
           );
-          return isWide ? (
-            <article class="card card--wide">{flow}{shot}<div class="card__text">{text}</div></article>
-          ) : (
-            <article class="card">{flow}{shot}{text}</article>
+          return (
+            <article class:list={['card', { 'card--wide': isWide }]} style={themeVars(p.theme)}>
+              {visual}{text}
+            </article>
           );
         })}
       </section>
 
-      <section id="about" class="about">
+      <section class="principles" aria-labelledby="principles-title">
+        <div class="cs-split">
+          <div class="cs-title"><span class="label">How I build</span><h2 id="principles-title">Six rules every project here follows.</h2></div>
+          <p class="cs-text">Each one links to the place in a case study where it mattered.</p>
+        </div>
+        <ol class="principles__list">
+          {site.principles.map((pr, i) => (
+            <li>
+              <a href={pr.href}>
+                <span class="mono">{String(i + 1).padStart(2, '0')}</span>
+                <strong>{pr.title}</strong>
+                <span class="principles__proof">{pr.proof} →</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="about" class="about-bio" aria-labelledby="about-title">
+        <div class="about-bio__head">
+          <h2 id="about-title">About</h2>
+          <div class="bio-toggle" role="radiogroup" aria-label="Bio length">
+            <input type="radio" name="bio" id="bio-short" checked />
+            <label for="bio-short">Short</label>
+            <input type="radio" name="bio" id="bio-long" />
+            <label for="bio-long">Long</label>
+          </div>
+        </div>
+        <div class="bio bio--short">{site.bio.short.map((p) => <p>{p}</p>)}</div>
+        <div class="bio bio--long">{site.bio.long.map((p) => <p>{p}</p>)}</div>
+      </section>
+
+      <section class="about">
         <div>
           <h2>Stack</h2>
           <div class="stack-groups">

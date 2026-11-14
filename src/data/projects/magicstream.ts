@@ -73,6 +73,9 @@ export const magicstream: Project = {
     },
   ],
   card: {
+    outcome: 'Calls the LLM only when a review is written, so browsing never waits on a model and an unchanged re-save takes 5 ms instead of 474.',
+    kind: ['Full-stack'],
+    year: '2026',
     summary: 'A movie streaming app where an LLM ranks every review at write time, so recommendations never wait on a model. Auth built from scratch with rotating refresh tokens.',
     tags: ['Go', 'React', 'MongoDB', 'Cloud Run'],
     shot: { src: home, alt: 'MagicStream catalog: film title cards with five-bulb rankings' },

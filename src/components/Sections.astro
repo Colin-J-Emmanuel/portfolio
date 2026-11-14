@@ -9,10 +9,11 @@ const half = '(max-width: 960px) 100vw, 528px';
 ---
 {sections.map((s, idx) => {
   const first = idx === 0;
+  const id = 'num' in s ? `s-${s.num}` : s.kind === 'story' ? `s-${s.label.split(' ')[0]}` : s.kind === 'limits' ? `s-${s.limitsLabel.split(' ')[0]}` : undefined;
   switch (s.kind) {
     case 'prose':
       return (
-        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+        <section id={id} class:list={['cs-section', { 'cs-section--first': first }]}>
           <div class="cs-split">
             <SectionTitle num={s.num} title={s.title} />
             <div class="cs-text">
@@ -24,7 +25,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'steps':
       return (
-        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+        <section id={id} class:list={['cs-section', { 'cs-section--first': first }]}>
           <div class="cs-split">
             <SectionTitle num={s.num} title={s.title} />
             {s.intro && <p class="cs-text" set:html={s.intro} />}
@@ -41,7 +42,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'image':
       return (
-        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+        <section id={id} class:list={['cs-section', { 'cs-section--first': first }]}>
           <div class="cs-split">
             <SectionTitle num={s.num} title={s.title} />
             {s.intro && <p class="cs-text" set:html={s.intro} />}
@@ -59,7 +60,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'split':
       return (
-        <section class="media-split">
+        <section id={id} class="media-split">
           <div class="cs-text">
             <span class="cs-num">{s.num}</span>
             <h2 style="font-size: 32px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink)">{s.title}</h2>
@@ -73,7 +74,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'points':
       return (
-        <section class="media-split media-split--top">
+        <section id={id} class="media-split media-split--top">
           <div class="cs-text" style="flex: 3 1 560px; gap: 28px">
             <SectionTitle num={s.num} title={s.title} />
             <div class="points">
@@ -87,7 +88,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'gallery':
       return (
-        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+        <section id={id} class:list={['cs-section', { 'cs-section--first': first }]}>
           <div class="cs-split"><SectionTitle num={s.num} title={s.title} />{s.intro && <p class="cs-text" set:html={s.intro} />}</div>
           <div class="media-split media-split--top" style="padding-top: 0; gap: 28px">
             <figure style="flex: 3 1 560px">
@@ -103,7 +104,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'cards':
       return (
-        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+        <section id={id} class:list={['cs-section', { 'cs-section--first': first }]}>
           <div class="cs-split">
             <SectionTitle num={s.num} title={s.title} />
             {s.intro && <p class="cs-text" set:html={s.intro} />}
@@ -119,7 +120,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'rows':
       return (
-        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+        <section id={id} class:list={['cs-section', { 'cs-section--first': first }]}>
           <div class="cs-split">
             <SectionTitle num={s.num} title={s.title} />
             {s.intro && <p class="cs-text" set:html={s.intro} />}
@@ -131,7 +132,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'table':
       return (
-        <section class:list={['cs-section', { 'cs-section--first': first }]}>
+        <section id={id} class:list={['cs-section', { 'cs-section--first': first }]}>
           <div class="cs-split">
             <SectionTitle num={s.num} title={s.title} />
             {s.intro && <p class="cs-text" set:html={s.intro} />}
@@ -155,7 +156,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'story':
       return (
-        <section class="story">
+        <section id={id} class="story">
           <span class="story__label">{s.label}</span>
           <h2>{s.title}</h2>
           <div class="story__body">
@@ -175,7 +176,7 @@ const half = '(max-width: 960px) 100vw, 528px';
       );
     case 'limits':
       return (
-        <section class="limits">
+        <section id={id} class="limits">
           <div class="limits__a"><span class="label">{s.limitsLabel}</span><ul>{s.limits.map((l) => <li set:html={l} />)}</ul></div>
           <div class="limits__b"><span class="label">{s.nextLabel}</span><ul>{s.next.map((l) => <li set:html={l} />)}</ul></div>
         </section>

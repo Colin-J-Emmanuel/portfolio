@@ -99,6 +99,9 @@ export const prReviewer: Project = {
     },
   ],
   card: {
+    outcome: 'Reviews a PR in 8.3 s instead of ~21 s by running four agents in parallel, and caught a 50% pricing error in its own cost tracking.',
+    kind: ['Backend', 'AI agents'],
+    year: '2026',
     summary: 'Security, quality, testing and docs agents review every PR in parallel and post one idempotent comment. Verified cost accounting caught a 50% pricing error.',
     tags: ['FastAPI', 'LangGraph', 'Redis', 'Postgres + pgvector'],
     flow: [{ label: 'webhook' }, { label: 'ARQ' }, { label: '4 agents ∥', on: true }, { label: 'aggregate' }, { label: 'PR comment' }],

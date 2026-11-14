@@ -95,6 +95,9 @@ export const terminalAgent: Project = {
     },
   ],
   card: {
+    outcome: 'Runs AI-generated code in a network-less Docker sandbox, with destructive actions denied by default and 11 offline tests.',
+    kind: ['AI agents', 'Dev tools'],
+    year: '2026',
     summary: 'A coding agent that reads, edits and runs code from your terminal. Generated code is validated, then run in a network-less container. Destructive actions are denied unless you confirm them.',
     tags: ['Python', 'Claude API', 'Docker', 'pytest'],
     flow: [{ label: 'prompt' }, { label: 'ReAct loop ↻', on: true }, { label: 'AST check' }, { label: 'Docker sandbox' }],

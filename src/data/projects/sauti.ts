@@ -108,6 +108,9 @@ export const sauti: Project = {
     },
   ],
   card: {
+    outcome: 'Credits every PayPal payment exactly once, whichever of two signals arrives first, and is tested against 8 failure cases.',
+    kind: ['AI agent', 'Payments'],
+    year: '2026',
     summary: "A shopkeeper in Dar es Salaam speaks his sales into WhatsApp. Sauti keeps his books and runs a grocery wallet that each customer's family abroad tops up through PayPal, settling each payment exactly once, whether PayPal's webhook or a status check reports it first.",
     tags: ['Next.js', 'Claude', 'PayPal Agent Toolkit', 'WhatsApp Cloud API', 'ElevenLabs'],
     links: [],

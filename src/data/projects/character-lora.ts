@@ -92,6 +92,9 @@ export const characterLora: Project = {
     },
   ],
   card: {
+    outcome: "Raises the character's identity score from 0.545 to 0.809 across six scenes, measured with a four-metric eval harness.",
+    kind: ['Machine learning'],
+    year: '2026',
     summary: 'Fine-tunes Stable Diffusion XL with DreamBooth-style LoRA so one character stays recognizable in a coffee shop, in space or in armor. A four-metric eval harness scores prompt fidelity and identity fidelity separately, and documents where it fails.',
     tags: ['PyTorch', 'Stable Diffusion XL', 'Diffusers', 'LoRA', 'CLIP · DINO'],
     flow: [{ label: 'SDXL (frozen)' }, { label: 'LoRA adapter', on: true }, { label: 'any scene' }, { label: 'CLIP-T · CLIP-I · DINO' }],

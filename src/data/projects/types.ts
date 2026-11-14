@@ -50,6 +50,11 @@ export interface Project {
   sections: Section[];
   /** Home-page card */
   card: {
+    /** One sentence with a concrete outcome, shown on the home card. */
+    outcome: string;
+    /** Kind of work + year, shown as small labels, e.g. ['Backend', 'AI agents'] */
+    kind: string[];
+    year: string;
     summary: string;
     tags: string[];
     flow?: { label: string; on?: boolean }[];
