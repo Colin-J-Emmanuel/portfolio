@@ -88,7 +88,8 @@ export const site = {
         },
         {
           title: 'Ursa Space Systems', role: 'Machine Learning Engineer', when: 'Aug – Dec 2025',
-          tags: ['Machine learning', 'Data analysis'],
+          description: 'Classified ships vs. icebergs in satellite radar (SAR) imagery: evaluated Vision Transformer embeddings for separability and built a baseline MLP that reached 95% validation accuracy.',
+          tags: ['Computer vision', 'Vision Transformers', 'Hugging Face'],
         },
         {
           title: 'Network Tree', role: 'Software Engineer Intern · Full-stack', when: 'Jan – Aug 2025',
