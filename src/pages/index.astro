@@ -139,26 +139,72 @@ const ext = { target: '_blank', rel: 'noopener' };
         <div class="bio bio--long">{site.bio.long.map((p) => <p>{p}</p>)}</div>
       </section>
 
-      <section class="about">
-        <div>
-          <h2>Stack</h2>
-          <div class="stack-groups">
-            {site.stack.map((g) => (
-              <div class="stack-group">
-                <span class="label">{g.group}</span>
-                <div class="pills">{g.items.map((it) => <span class="pill">{it}</span>)}</div>
+      <section id="stack" class="stack" aria-labelledby="stack-title">
+        <div class="cs-split">
+          <div class="cs-title"><span class="label">Stack</span><h2 id="stack-title">What I build with.</h2></div>
+          <p class="cs-text">Highlighted tools are used in a project on this site. Each group links to where.</p>
+        </div>
+        <div class="stack__grid">
+          {site.stack.map((g, gi) => {
+            const slugs = [...new Set(g.items.flatMap((it) => site.usedIn[it] ?? []))];
+            const used = projects.filter((p) => slugs.includes(p.slug));
+            return (
+              <div class="stack__card">
+                <div class="stack__head">
+                  <span class="label">{String(gi + 1).padStart(2, '0')}</span>
+                  <h3>{g.group}</h3>
+                </div>
+                <ul class="stack__pills">
+                  {g.items.map((it) => {
+                    const where = (site.usedIn[it] ?? []).map((sl) => projects.find((p) => p.slug === sl)?.title).filter(Boolean);
+                    return where.length ? (
+                      <li class="pill pill--used" title={`Used in ${where.join(', ')}`}>{it}<span class="sr-only"> (used in {where.join(', ')})</span></li>
+                    ) : (
+                      <li class="pill">{it}</li>
+                    );
+                  })}
+                </ul>
+                {used.length > 0 && (
+                  <div class="stack__used">
+                    <span class="label">Used in</span>
+                    {used.map((p) => (
+                      <a href={`/projects/${p.slug}`}><i style={`background:${p.theme.band}`} aria-hidden="true"></i>{p.title}</a>
+                    ))}
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-        <div>
-          <h2>Background</h2>
-          <div class="timeline">
-            <ul>
-              {site.background.map((b) => <li><strong>{b.title}</strong><span>{b.detail}</span></li>)}
-            </ul>
-          </div>
+      </section>
+
+      <section id="background" class="background" aria-labelledby="background-title">
+        <div class="cs-split">
+          <div class="cs-title"><span class="label">Background</span><h2 id="background-title">Where I've been.</h2></div>
         </div>
+        {site.background.map((grp) => (
+          <div class="bg-group">
+            <h3 class="label bg-group__title">{grp.group}</h3>
+            <ol class="bg-list">
+              {grp.items.map((b) => (
+                <li class="bg-item">
+                  <div class="bg-item__when"><span class="mono">{b.when}</span></div>
+                  <div class="bg-item__body">
+                    <h4>{b.title}</h4>
+                    <p class="bg-item__role">{b.role}</p>
+                    {b.description && <p class="bg-item__desc">{b.description}</p>}
+                    {(b.tags || b.link) && (
+                      <div class="tags">
+                        {b.tags?.map((t) => <span class="tag">{t}</span>)}
+                        {b.link && <a class="bg-item__link" href={b.link.href} {...(b.link.href.startsWith('http') ? ext : {})}>{b.link.label} →</a>}
+                      </div>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
       </section>
 
       <Footer />
