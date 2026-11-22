@@ -1,8 +1,8 @@
 import { sauti } from './sauti';
+import { characterLora } from './character-lora';
 import { prReviewer } from './pr-reviewer';
 import { terminalAgent } from './terminal-agent';
 import { magicstream } from './magicstream';
-import { characterLora } from './character-lora';
 import type { Project, Theme } from './types';
 
 /** Order here = order on the home page and in the "Next project" loop. The first one is featured. */

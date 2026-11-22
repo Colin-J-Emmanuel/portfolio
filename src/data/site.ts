@@ -2,19 +2,19 @@
 export const site = {
   name: 'Colin J. Emmanuel',
   description:
-    'Software engineer building backends, machine learning systems and full-stack apps. Projects, case studies and the decisions behind them.',
+    'AI-native software engineer building backends, machine learning systems and full-stack apps. Projects, case studies and the decisions behind them.',
   // Short credibility line under the headline
-  credentials: ['Columbia CS', 'Break Through Tech AI/ML Fellow, Cornell Tech', 'PayPal AI Hackathon 2026'],
+  credentials: ['New York, NY', 'Computer Science @ Columbia University', 'Former AI/ML Fellow @ Break Through Tech, Cornell Tech'],
   // About: a short bio, and a longer one behind the "Long" toggle. Edit freely; plain text, one string per paragraph.
   bio: {
     short: [
-      "I'm a software engineer and Columbia Computer Science graduate. I build systems end to end: backends that stay correct when things go wrong, ML experiments with honest evaluation, and apps people actually use.",
+      "I build AI-native software. Lately I’ve been sharpening my skills by shipping at hackathons and building side projects I care about, with one goal: getting them into people’s hands.",
     ],
     long: [
-      "I'm a software engineer and Columbia Computer Science graduate. I build systems end to end: backends that stay correct when things go wrong, ML experiments with honest evaluation, and apps people actually use.",
-      "Most of my projects start with something I want to understand properly, like how a coding agent really works, or what it takes to credit a payment exactly once. I build them one tested piece at a time, check each piece on its failure path before moving on, and write down why every decision was made. That habit is where these case studies come from.",
-      "Sauti is closest to what I want to do long term: build for problems I've seen in Tanzania and across East Africa, where good software can still change how a small business runs.",
-      "I was an AI/ML Fellow with Break Through Tech AI at Cornell Tech. Right now I'm looking for software engineering roles on teams that ship real products.",
+      "I build AI-native software. Lately I've been sharpening my skills by shipping at hackathons and building side projects I care about, with one goal: getting them into people's hands.",
+    "My interest in AI started before I wrote much code. As an IT intern at Absa Bank Tanzania, I shadowed the team building Abby, a virtual assistant that let customers bank over WhatsApp. Seeing AI reach people on an app they already used, in a market most tech overlooks, is a big part of why I chose to pursue machine learning and AI.",
+    "Since then I've studied artificial intelligence at Columbia, spent a year as an AI/ML Fellow with Break Through Tech at Cornell Tech, and built ML models for satellite radar imagery at Ursa Space Systems, classifying ships and icebergs. Today I help train computer-use agents at Mercor by recording the real software workflows they learn from.",
+    "Sauti brings it full circle. When PayPal and M-Pesa linked up in Tanzania, I built a WhatsApp agent at the 2026 PayPal AI Hackathon that lets a corner-shop owner keep his books by voice in Swahili, while family abroad tops up a grocery wallet through PayPal. Connecting it to M-Pesa cash-outs is next.",
     ],
   },
   // "How I build": each principle links to the case study that shows it
@@ -27,11 +27,10 @@ export const site = {
     { title: 'Write down the why behind every decision', proof: 'Sauti: key engineering decisions', href: '/projects/sauti#s-04' },
   ],
   interests: [
-    'Software engineering',
+    'AI engineering',
+    'Machine learning',
     'Backend development',
     'Full-stack',
-    'Machine learning',
-    'AI engineering',
   ],
   links: {
     github: 'https://github.com/Colin-J-Emmanuel',
@@ -40,10 +39,10 @@ export const site = {
     writing: '', // your Substack or Medium URL; until then the Writing link goes nowhere
   },
   stack: [
-    { group: 'Languages', items: ['Python', 'Go', 'TypeScript', 'JavaScript', 'Java', 'C++', 'C', 'SQL'] },
-    { group: 'Backend & frameworks', items: ['FastAPI', 'Gin', 'Spring Boot', 'Apache Kafka', 'Node.js', 'React', 'Next.js', 'Tailwind CSS'] },
     { group: 'AI, LLMs & agents', items: ['Claude', 'OpenAI', 'Hugging Face', 'LangGraph', 'LangSmith', 'RAG'] },
     { group: 'Machine learning & data', items: ['PyTorch', 'TensorFlow', 'scikit-learn', 'Pandas', 'NumPy'] },
+    { group: 'Languages', items: ['Python', 'Go', 'TypeScript', 'JavaScript', 'Java', 'C++', 'C', 'SQL'] },
+    { group: 'Backend & frameworks', items: ['FastAPI', 'Gin', 'Spring Boot', 'Apache Kafka', 'Node.js', 'React', 'Next.js', 'Tailwind CSS'] },
     { group: 'Databases', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Supabase'] },
     { group: 'Cloud & tools', items: ['AWS', 'Google Cloud', 'Docker', 'GitHub Actions', 'Vercel'] },
   ],
