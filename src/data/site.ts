@@ -118,7 +118,7 @@ export const site = {
           link: { label: 'Case study', href: '/projects/sauti' },
         },
         {
-          title: 'JPMorganChase', domain: 'jpmorganchase.com', role: 'Advanced Software Engineering Job Simulation', when: 'Jun – Jul 2026',
+          title: 'JPMorganChase', domain: 'jpmorganchase.com', role: 'Advanced Software Engineering Job Simulation', when: 'May – Jul 2026',
           description: 'Built a Spring Boot microservice that consumes Kafka transaction messages, validates and persists them with Spring Data JPA, calls an external incentive API and serves balances over REST.',
           tags: ['Spring Boot', 'Apache Kafka', 'REST'],
         },
