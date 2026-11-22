@@ -80,7 +80,7 @@ export const site = {
           tags: ['AI agents', 'Software workflows'],
         },
         {
-          title: 'Columbia University, Department of Computer Science', domain: 'cs.columbia.edu', role: 'Software Engineer Intern · The Humor Project (crackd.ai)', when: 'Jan – Jun 2026',
+          title: 'Columbia University, Department of Computer Science', logo: '/logos/Columbia_CS.jpeg', domain: 'cs.columbia.edu', role: 'Software Engineer Intern · The Humor Project (crackd.ai)', when: 'Jan – Jun 2026',
           description: 'Built a public caption-rating app with Google sign-in, persistent votes and a vote-ranked feed, plus admin tools for ordered prompt pipelines, image uploads to a caption-generation service and role-based access.',
           tags: ['TypeScript', 'Next.js', 'Supabase'],
           link: { label: 'crackd.ai', href: 'https://crackd.ai' },
@@ -91,12 +91,12 @@ export const site = {
           tags: ['Computer vision', 'Vision Transformers', 'Hugging Face'],
         },
         {
-          title: 'Network Tree', role: 'Software Engineer Intern · Full-stack', when: 'Jan – Aug 2025',
+          title: 'Network Tree', logo: '/logos/network-tree.jpeg', domanin: 'networktree.app', role: 'Software Engineer Intern · Full-stack', when: 'Jan – Aug 2025',
           description: 'Full-stack development, first through Columbia Build Lab in the spring, then as a summer intern.',
           tags: ['TypeScript', 'Full-stack'],
         },
         {
-          title: 'Columbia University Information Technology', domain: 'cuit.columbia.edu', role: 'Technical Support Specialist · Part-time', when: 'Aug 2023 – May 2026',
+          title: 'Columbia University Information Technology', logo: '/logos/CUIT.jpeg', domain: 'cuit.columbia.edu', role: 'Technical Support Specialist · Part-time', when: 'Aug 2023 – May 2026',
           description: 'Supported a campus of 36,000+ students and 4,600+ faculty, and deployed and maintained hybrid-learning infrastructure across labs and classrooms.',
         },
         {
@@ -113,7 +113,7 @@ export const site = {
           description: 'Coursework in Artificial Intelligence, Natural Language Processing, Databases, Data Structures, Advanced Programming in C and UI Design. Member of ColorStack, CORE, the Columbia Data Science Society and the African Development Group.',
         },
         {
-          title: 'PayPal AI Hackathon', domain: 'paypal.com', role: 'Built Sauti', when: '2026',
+          title: '2026 PayPal AI Hackathon', domain: 'paypal.com', role: 'Built Sauti', when: '2026',
           description: 'A Swahili-speaking PayPal agent for East African corner shops and the families abroad who pay for their groceries.',
           link: { label: 'Case study', href: '/projects/sauti' },
         },
@@ -128,7 +128,7 @@ export const site = {
           tags: ['Machine learning', 'Deep learning'],
         },
         {
-          title: 'Headstarter', domain: 'headstarter.co', role: 'Software Engineering Fellow', when: 'Jul – Sep 2024',
+          title: 'Headstarter', logo: '/logos/headstarter.jpeg', domain: 'headstarter.co', role: 'Software Engineering Fellow', when: 'Jul – Sep 2024',
           description: 'Built and deployed AI apps with a team of four engineering fellows, from design to deployment, coached by engineers from Amazon, Bloomberg and Capital One.',
           tags: ['Next.js', 'OpenAI API', 'Pinecone', 'Stripe API'],
         },
