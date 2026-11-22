@@ -11,6 +11,18 @@ const grid = rest.slice(0, 3);
 const wide = rest.slice(3);
 const featuredHero = featured.hero.kind === 'image' ? featured.hero.image : null;
 const ext = { target: '_blank', rel: 'noopener' };
+// Background logos: a local file (`logo`) wins, then Brandfetch by `domain`, then initials underneath.
+// If an image fails to load it removes itself and the initials show through.
+const brandfetchId = import.meta.env.BRANDFETCH_CLIENT_ID;
+const logoSrc = (b: object): string | undefined => {
+  if ('logo' in b && typeof b.logo === 'string' && b.logo) return b.logo;
+  if ('domain' in b && typeof b.domain === 'string' && b.domain && brandfetchId)
+    return `https://cdn.brandfetch.io/${b.domain}?c=${brandfetchId}`;
+  return undefined;
+};
+// Fallback for Background entries without a logo: "Absa Bank Tanzania" → "AB"
+const initials = (name: string) =>
+  name.split(/[\s,·]+/).filter((w) => w && !['of', 'the', 'and', '&'].includes(w.toLowerCase())).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
 ---
 <Base>
   <Nav ruled />
@@ -18,8 +30,8 @@ const ext = { target: '_blank', rel: 'noopener' };
     <div class="container">
       <section class="hero">
         <p class="hero__interests"><span class="hero__dot" aria-hidden="true">●</span>{site.interests.join(' · ')}</p>
-        <h1>I enjoy building software. My long-term goal is to build software that’s useful, reliable, and AI-native in the <span class="hl">real world</span>.</h1>
-        <p class="hero__lead">I build agentic software that takes real actions: a PayPal agent that keeps a Tanzanian shopkeeper's books in Swahili, a code-review pipeline that runs four specialist agents in parallel. Every project is built to be explained, decision by decision.</p>
+        <h1>I build software that holds up in the <span class="hl">real world</span>.</h1>
+        <p class="hero__lead">Backends, machine learning and full-stack apps: a PR review pipeline that runs four agents in parallel, an SDXL model fine-tuned to keep one character consistent, and a PayPal agent that keeps a Tanzanian shopkeeper's books in Swahili. Each one built to be explained, decision by decision.</p>
         <ul class="creds" aria-label="Credentials">
           {site.credentials.map((c) => <li>{c}</li>)}
         </ul>
@@ -189,6 +201,10 @@ const ext = { target: '_blank', rel: 'noopener' };
               {grp.items.map((b) => (
                 <li class="bg-item">
                   <div class="bg-item__when"><span class="mono">{b.when}</span></div>
+                  <span class="bg-item__logo" aria-hidden="true">
+                    <span class="bg-item__initials">{initials(b.title)}</span>
+                    {logoSrc(b) && <img src={logoSrc(b)} alt="" width="48" height="48" loading="lazy" onerror="this.remove()" />}
+                  </span>
                   <div class="bg-item__body">
                     <h4>{b.title}</h4>
                     <p class="bg-item__role">{b.role}</p>

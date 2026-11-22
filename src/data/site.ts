@@ -75,18 +75,18 @@ export const site = {
       group: 'Experience',
       items: [
         {
-          title: 'Mercor', role: 'AI Training Data Specialist, Computer-Use Agents · Contract', when: 'Oct 2026 – Present',
+          title: 'Mercor', domain: 'mercor.com', role: 'AI Training Data Specialist, Computer-Use Agents · Contract', when: 'Oct 2026 – Present',
           description: 'Record expert, end-to-end software workflows on macOS that train AI agents to operate desktop applications and complete multi-step development tasks.',
           tags: ['AI agents', 'Software workflows'],
         },
         {
-          title: 'Columbia University, Department of Computer Science', role: 'Software Engineer Intern · The Humor Project (crackd.ai)', when: 'Jan – Jun 2026',
+          title: 'Columbia University, Department of Computer Science', domain: 'cs.columbia.edu', role: 'Software Engineer Intern · The Humor Project (crackd.ai)', when: 'Jan – Jun 2026',
           description: 'Built a public caption-rating app with Google sign-in, persistent votes and a vote-ranked feed, plus admin tools for ordered prompt pipelines, image uploads to a caption-generation service and role-based access.',
           tags: ['TypeScript', 'Next.js', 'Supabase'],
           link: { label: 'crackd.ai', href: 'https://crackd.ai' },
         },
         {
-          title: 'Ursa Space Systems', role: 'Machine Learning Engineer', when: 'Aug – Dec 2025',
+          title: 'Ursa Space Systems', domain: 'ursaspace.com', role: 'Machine Learning Engineer', when: 'Aug – Dec 2025',
           description: 'Classified ships vs. icebergs in satellite radar (SAR) imagery: evaluated Vision Transformer embeddings for separability and built a baseline MLP that reached 95% validation accuracy.',
           tags: ['Computer vision', 'Vision Transformers', 'Hugging Face'],
         },
@@ -96,11 +96,11 @@ export const site = {
           tags: ['TypeScript', 'Full-stack'],
         },
         {
-          title: 'Columbia University Information Technology', role: 'Technical Support Specialist · Part-time', when: 'Aug 2023 – May 2026',
+          title: 'Columbia University Information Technology', domain: 'cuit.columbia.edu', role: 'Technical Support Specialist · Part-time', when: 'Aug 2023 – May 2026',
           description: 'Supported a campus of 36,000+ students and 4,600+ faculty, and deployed and maintained hybrid-learning infrastructure across labs and classrooms.',
         },
         {
-          title: 'Absa Bank Tanzania', role: 'IT Department Intern · Dar es Salaam', when: 'Nov 2020 – Feb 2021',
+          title: 'Absa Bank Tanzania', domain: 'absa.co.tz', role: 'IT Department Intern · Dar es Salaam', when: 'Nov 2020 – Feb 2021',
           description: 'Frontline IT support across headquarters and branches. Shadowed the teams building "Abby," a WhatsApp-integrated AI banking chatbot, and an internal bulk-SMS portal.',
         },
       ],
@@ -109,23 +109,28 @@ export const site = {
       group: 'Education & programs',
       items: [
         {
-          title: 'Columbia University', role: 'B.A. in Computer Science · Dean\'s List', when: '',
+          title: 'Columbia University', domain: 'columbia.edu', role: 'B.A. in Computer Science · Dean\'s List', when: '',
           description: 'Coursework in Artificial Intelligence, Natural Language Processing, Databases, Data Structures, Advanced Programming in C and UI Design. Member of ColorStack, CORE, the Columbia Data Science Society and the African Development Group.',
         },
         {
-          title: 'PayPal AI Hackathon', role: 'Built Sauti', when: '2026',
+          title: 'PayPal AI Hackathon', domain: 'paypal.com', role: 'Built Sauti', when: '2026',
           description: 'A Swahili-speaking PayPal agent for East African corner shops and the families abroad who pay for their groceries.',
           link: { label: 'Case study', href: '/projects/sauti' },
         },
         {
-          title: 'JPMorganChase', role: 'Advanced Software Engineering Job Simulation', when: 'Jun – Jul 2026',
+          title: 'JPMorganChase', domain: 'jpmorganchase.com', role: 'Advanced Software Engineering Job Simulation', when: 'Jun – Jul 2026',
           description: 'Built a Spring Boot microservice that consumes Kafka transaction messages, validates and persists them with Spring Data JPA, calls an external incentive API and serves balances over REST.',
           tags: ['Spring Boot', 'Apache Kafka', 'REST'],
         },
         {
-          title: 'Break Through Tech AI · Cornell Tech', role: 'AI/ML Fellow', when: 'May 2025 – Apr 2026',
+          title: 'Break Through Tech AI · Cornell Tech', domain: 'breakthroughtech.org', role: 'AI/ML Fellow', when: 'May 2025 – Apr 2026',
           description: 'Selected from 3,600+ applicants across 200+ universities. A 12-month program in machine learning, deep learning for vision and NLP, and responsible AI, with an AI Studio project for an industry partner.',
           tags: ['Machine learning', 'Deep learning'],
+        },
+        {
+          title: 'Headstarter', domain: 'headstarter.co', role: 'Software Engineering Fellow', when: 'Jul – Sep 2024',
+          description: 'Built and deployed AI apps with a team of four engineering fellows, from design to deployment, coached by engineers from Amazon, Bloomberg and Capital One.',
+          tags: ['Next.js', 'OpenAI API', 'Pinecone', 'Stripe API'],
         },
       ],
     },
